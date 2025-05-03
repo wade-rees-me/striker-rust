@@ -1,0 +1,21 @@
+[env]
+# Ensure deterministic output
+LLVM_PROFILE_FILE = "coverage/%p-%m.profraw"
+
+
+[alias]
+#jobs = 1                      # number of parallel jobs, defaults to # of CPUs
+# Add a custom alias for cargo llvm-cov
+cov = "llvm-cov --no-report --ignore-filename-regex '/tests?/|/examples?/|/target/'"
+
+[target.'cfg(all())']
+rustflags = [
+  "-Cinstrument-coverage=all",
+  "-Clink-dead-code",
+  "-Coverflow-checks=off"
+  #"-Zno-profiler-runtime" # If using nightly, otherwise omit
+]
+
+[build]
+rustdocflags = ["-Cpanic=abort"]
+
