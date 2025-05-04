@@ -1,5 +1,5 @@
 [package]
-name = "striker"
+name = "striker-rust"
 version = "0.1.0"
 edition = "2024"
 
@@ -23,11 +23,4 @@ coverage_nightly = []
 coverage-helper = "0.2"
 mockall = "0.12"
 mockito = "1"
-
-[build]
-#profiler = true
-
-#
-#[package.metadata.coverage]
-#ignore-tests = true
 

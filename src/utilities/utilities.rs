@@ -1,8 +1,11 @@
+use crate::constants::constants::MY_HOSTNAME;
 use crate::traits::traits::{JsonFetcher, JsonSender};
 use reqwest::blocking::Client;
 use serde_json::Value;
 use std::env;
 use std::error::Error;
+use std::process::Command;
+use std::str;
 use std::string::String;
 
 #[derive(Default, Debug, Clone)]
@@ -39,6 +42,24 @@ pub fn get_charts_url() -> Option<String> {
 
 pub fn get_simulations_url() -> Option<String> {
     env::var("STRIKER_URL_SIMULATIONS").ok()
+}
+
+pub fn is_my_computer() -> bool {
+    // Get the current hostname (this can be adjusted to use the IP address if needed)
+    let hostname = get_hostname().unwrap_or_else(|| String::from("unknown"));
+
+    // Replace with your unique hostname or IP address
+    let my_computer_name = MY_HOSTNAME;
+
+    hostname == my_computer_name
+}
+
+fn get_hostname() -> Option<String> {
+    // Get the hostname using the "hostname" command
+    let output = Command::new("hostname").output().ok()?;
+
+    let hostname = str::from_utf8(&output.stdout).ok()?.trim().to_string();
+    Some(hostname)
 }
 
 //
