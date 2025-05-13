@@ -1,5 +1,6 @@
 use crate::traits::traits::JsonFetcher;
 use crate::utilities::utilities::get_rules_url;
+use crate::xlog_panic;
 use serde_json::Value;
 use std::fmt;
 
@@ -28,7 +29,7 @@ impl Rules {
         let url = format!("http://{}/{}", get_rules_url().expect("Missing rules URL"), decks);
         match fetcher.fetch_json(&url) {
             Ok(json_value) => self.json_response = json_value,
-            Err(e) => panic!("Error fetching JSON: {}", e),
+            Err(e) => xlog_panic!("Error fetching JSON: {}", e),
         }
         self.fetch_table();
     }

@@ -1,4 +1,5 @@
 use crate::cards::hand::Hand;
+use crate::xlog_panic;
 
 #[derive(Debug, Clone)]
 pub struct Wager {
@@ -66,7 +67,7 @@ impl Wager {
 
     pub fn split_hand(&mut self, split: &mut Wager) {
         if !self.hand.is_pair() {
-            panic!("Cannot split a non-pair hand");
+            xlog_panic!("Cannot split a non-pair hand");
         }
 
         split.amount_bet = self.amount_bet;

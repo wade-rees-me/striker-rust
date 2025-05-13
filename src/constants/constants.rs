@@ -1,6 +1,6 @@
 // General constants
 pub const STRIKER_WHO_AM_I: &str = "striker-rust";
-pub const STRIKER_VERSION: &str = "v3.00.00"; // Epoch.Major.Minor
+pub const STRIKER_VERSION: &str = "v3.1.0"; // Epoch.Major.Minor
 pub const TIME_LAYOUT: &str = "%Y-%m-%d %H:%M:%S %z";
 pub const STATUS_ROUNDS: usize = 1000000;
 pub const MY_HOSTNAME: &str = "Striker";

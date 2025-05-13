@@ -1,4 +1,5 @@
 use crate::constants::constants::*;
+use crate::xlog_panic;
 use std::env;
 use std::process;
 
@@ -91,7 +92,7 @@ impl Arguments {
                 }
                 _ => {
                     Arguments::print_help_message();
-                    panic!("Error: Invalid argument: {}", argv[i]);
+                    xlog_panic!("Error: Invalid argument: {}", argv[i]);
                 }
             }
             i += 1;
@@ -103,14 +104,14 @@ impl Arguments {
     fn parse_usize_arg(argv: &[String], i: &mut usize, min: usize, max: usize, field_name: &str) -> usize {
         *i += 1;
         if *i >= argv.len() {
-            panic!("Missing {}", field_name);
+            xlog_panic!("Missing {}", field_name);
         }
         let value = argv[*i].replace(",", "");
         let parsed = value.parse().unwrap_or_else(|_| {
-            panic!("Invalid {}", field_name);
+            xlog_panic!("Invalid {}", field_name);
         });
         if parsed < min || parsed > max {
-            panic!("{} must be between {} and {}", field_name, min, max);
+            xlog_panic!("{} must be between {} and {}", field_name, min, max);
         }
         parsed
     }
