@@ -27,7 +27,7 @@ lazy_static! {
 
 static INIT: Once = Once::new();
 
-pub fn init_xlog<A: ToSocketAddrs>(addr: A) {
+pub fn xlog_init<A: ToSocketAddrs>(addr: A) {
     INIT.call_once(|| match UdpSocket::bind("0.0.0.0:0") {
         Ok(sock) => {
             let addr = addr.to_socket_addrs().unwrap().next().unwrap();

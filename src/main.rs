@@ -24,7 +24,7 @@ use xlog::xlog::*;
 
 //
 fn main() {
-    init_xlog(SYSLOG_ADDRESS);
+    xlog_init(SYSLOG_ADDRESS);
     let mut handles = Vec::new();
     let arguments = Arguments::new();
     let parameters = Parameters::new(&arguments);
