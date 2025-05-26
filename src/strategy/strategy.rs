@@ -4,6 +4,7 @@ use crate::constants::constants::{DECKS_SINGLE_DECK, NUMBER_OF_CARDS_IN_DECK, ST
 use crate::strategy::chart::Chart;
 use crate::traits::traits::JsonFetcher;
 use crate::utilities::utilities::get_charts_url;
+use crate::xlog_panic;
 use serde_json::Value;
 
 #[derive(Debug, Clone)]
@@ -48,7 +49,7 @@ impl Strategy {
             );
             match fetcher.fetch_json(&url) {
                 Ok(json_value) => self.json_response = json_value,
-                Err(e) => panic!("Error fetching JSON: {}", e),
+                Err(e) => xlog_panic!("Error fetching JSON: {}", e),
             }
             self.fetch_table(self.json_response.clone());
 

@@ -1,5 +1,6 @@
 pub const TABLE_SIZE: usize = 21;
 pub const NUM_COLUMNS: usize = 12;
+use crate::xlog_panic;
 
 #[derive(Default, Debug, Clone)]
 pub struct ChartRow {
@@ -48,7 +49,7 @@ impl Chart {
     pub fn get_value_by_key(&self, key: &str, up: usize) -> &str {
         self.get_row_index(key)
             .map(|i| &self.rows[i].value[up])
-            .unwrap_or_else(|| panic!("Cannot find value in {} for {} vs {}", self.name, key, up))
+            .unwrap_or_else(|| xlog_panic!("Cannot find value in {} for {} vs {}", self.name, key, up))
     }
 
     pub fn print(&self) {
