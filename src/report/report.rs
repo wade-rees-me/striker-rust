@@ -2,6 +2,7 @@ use crate::arguments::parameters::Parameters;
 use crate::constants::constants::{BILLION, NUMBER_OF_HANDS_DATABASE, STRIKER_VERSION};
 use crate::traits::traits::JsonSender;
 use crate::utilities::utilities::get_simulations_url;
+use crate::utilities::utilities::is_my_computer;
 use num_format::{Locale, ToFormattedString};
 use std::time::SystemTime;
 
@@ -76,6 +77,11 @@ impl Report {
     }
 
     pub fn insert(&mut self, sender: &dyn JsonSender) {
+        if !is_my_computer() {
+            println!("    This code is restricted to running only on my computer.");
+            return;
+        }
+
         if self.total_hands < NUMBER_OF_HANDS_DATABASE {
             println!(
                 "    Error: Not enough hands played ({}). Minimum required is {}",
